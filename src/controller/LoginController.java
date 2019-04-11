@@ -130,6 +130,15 @@ public class LoginController implements Initializable {
                 			Main.Get_Stage().setScene(scene);
                 			Main.Get_Stage().show();
             			}
+            			if(Designation.getText().equals("Cashier"))
+            			{
+            				System.out.println("Authenticate");
+                			Parent root = FXMLLoader.load(getClass().getResource("/view/CashierScreen.fxml"));
+                			Scene scene = new Scene(root, 650, 550);
+                			Main.Get_Stage().setScene(scene);
+                			Main.Get_Stage().setTitle("Process Sale");
+                			Main.Get_Stage().show();
+            			}
             			if(Designation.getText().equals("Designation"))
             			{
             				Alert alert = new Alert(AlertType.INFORMATION);
@@ -164,6 +173,7 @@ public class LoginController implements Initializable {
     @FXML
     public void cancelAction(ActionEvent event) {
         resetFields();
+        Designation.setText("Designation");
     }
 
     @FXML

@@ -49,7 +49,18 @@ public class ManagerScreenController {
 	private ObservableList<ObservableList> data;
 	@FXML 
 	private TableView tableview;
-
+	@FXML
+	private Button genreport;
+	
+	
+	
+	public void get_genreport(ActionEvent e) throws IOException
+	{
+		Parent root = FXMLLoader.load(getClass().getResource("/view/SaleReport.fxml"));
+		Scene scene = new Scene(root, 1000, 550);
+		Main.Get_Stage().setScene(scene);
+		Main.Get_Stage().show();
+	}
 	// Event Listener on Button[#addemployee].onAction
 	@FXML
 	public void registerEmployee(ActionEvent event) throws IOException {

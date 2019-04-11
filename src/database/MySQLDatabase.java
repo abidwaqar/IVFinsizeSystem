@@ -103,6 +103,16 @@ public class MySQLDatabase {
 		return stmt.executeUpdate(sqlQuery);
 	}
 	
+	public int addSale(String Ecode, String Edesc, String EName, int price, int qty, int subtotal, int payment, String sale_code) throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "INSERT INTO `sale`(`ERobot_Code`, `Description`, `Robot_Name`, `PricePerItem`, `ERobot_Qty`, `Sub_Total`, `Payment`, `Sale_Code`) "
+				+ "VALUES ('"+ Ecode +"', '"+ Edesc +"','"+ EName +"','"+ price +"','"+ qty +"','"+ subtotal 
+				+"','"+ payment +"','"+sale_code+"');";
+		System.out.println(sqlQuery);
+		return stmt.executeUpdate(sqlQuery);
+	}
+	
 	public int updateERobot(String code, String name, String desc, String price, String qty) throws SQLException
 	{
 		String sqlQuery = new String();
@@ -121,6 +131,42 @@ public class MySQLDatabase {
 			return -1;
 		}
 	}
+	
+	public int setSaleLineItemOnRobotCode(String sale_code, String ERobot_Code, String qty) throws SQLException
+	{
+		String sqlQuery = new String();
+		ArrayList<ArrayList<String>> rows = new ArrayList<ArrayList<String>>();
+		sqlQuery = "UPDATE `sale` SET `ERobot_Qty`=" + qty + " WHERE `Sale_Code` = " + sale_code + " AND `ERobot_Code`= " + ERobot_Code+ ";";
+		return stmt.executeUpdate(sqlQuery);
+	}
+
+//	public 
+//	{
+//		String sqlQuery = new String();
+//		ArrayList<ArrayList<String>> rows = new ArrayList<ArrayList<String>>();
+//		sqlQuery = "UPDATE `sale` SET `ERobot_Qty`=" + qty + " WHERE `Sale_Code` = " + sale_code + " AND `ERobot_Code`= " + ERobot_Code+ ";";
+//		return stmt.executeUpdate(sqlQuery);
+//		while (rsRows.next()){
+//			rows.add(rowToColumns(rsRows));
+//		}
+//		rsRows.close();
+//		return rows;
+//	}
+	
+	
+//	public void editSaleLineItem(String sale_code)
+//	{
+//		try {
+//			String sqlQuery = "SELECT * From SALE WHERE `Sale_Code` = '" + sale_code + "';";
+//			ResultSet rs = stmt.executeQuery(sqlQuery);
+//			rs.getInt(1);
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
 	
 	//helper
 	private ArrayList<String> rowToColumns(ResultSet row) throws SQLException

@@ -2,55 +2,71 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import com.mysql.jdbc.Statement;
 
 import application.Main;
+import database.MySQLDatabase;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.util.Callback;
 
-public class ViewReportController {
+public class SaleReportController implements Initializable {
 	@FXML
 	private TableView tableview;
 	@FXML
-	private Button back;
+	private Button cancel;
 	@FXML
-	private Button logout;
+	private Label lba;
+	@FXML
+	private Label lbb;
+	@FXML
+	private Label lbc;
 
-	// Event Listener on Button[#back].onAction
 	private ObservableList<ObservableList> data;
+	
+	
 	public void build()
 	{
-		data = null;	
+		if(tableview!=null)
+		{
+			
+		
+		tableview.getColumns().clear();
+		}
+		 data = null;	
          data = FXCollections.observableArrayList();
          try{
-       	String url1 = "jdbc:mysql://localhost/ivfinsizesystem";
+        	String url1 = "jdbc:mysql://localhost/ivfinsizesystem";
      		String user = "root";
      		String password = "";
      		Class.forName("com.mysql.jdbc.Driver");
 			Connection c1;
      		c1 = DriverManager.getConnection(url1, user, password);
 			Statement stmt = (Statement) c1.createStatement();
-           //SQL FOR SELECTING ALL OF CUSTOMER
-           String SQL = "SELECT * from e_robot";
-           //ResultSet
-           ResultSet rs = c1.createStatement().executeQuery(SQL);
+	         String SQL = "SELECT * from sale";
+	         ResultSet rs = c1.createStatement().executeQuery(SQL);
 
            /**********************************
             * TABLE COLUMN ADDED DYNAMICALLY *
@@ -75,7 +91,8 @@ public class ViewReportController {
            while(rs.next()){
                //Iterate Row
                ObservableList<String> row = FXCollections.observableArrayList();
-               for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+               for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++)
+               {
                    //Iterate Column
                    row.add(rs.getString(i));
                }
@@ -86,28 +103,43 @@ public class ViewReportController {
 
            //FINALLY ADDED TO TableView
            tableview.setItems(data);
-           Scene s = new Scene(tableview,600,600);
-           Main.Get_Stage().setScene(s);
-           Main.Get_Stage().show();
          }catch(Exception e){
              e.printStackTrace();
              System.out.println("Error on Building Data");             
          }
 	}
-	
-	// Event Listener on Button[#back].onAction
+
+	// Event Listener on Button[#cancel].onAction
 	@FXML
-	public void BackAction(ActionEvent event) throws IOException
-	{
-		build();
-	}
-	@FXML
-	public void logoutH(ActionEvent event) throws IOException {
-		System.out.println("Authenticate");
-		Parent root = FXMLLoader.load(getClass().getResource("/view/InventoryManagerScreen.fxml"));
-		Scene scene = new Scene(root, 550, 550);
+	public void cancelsale(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/view/ManagerScreen.fxml"));
+		Scene scene = new Scene(root, 650, 550);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}
-	
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		build();
+		ArrayList<ArrayList<String>> info = null;
+		int tot_sales=0,tot_quantity=0;
+		 try {
+			info= MySQLDatabase.getInstance().getRows("sale");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tot_sales = info.size();
+		for(int i=0;i<info.size();i++)
+		 {
+			tot_quantity+=Integer.parseInt(info.get(i).get(5));
+		 }
+		lba.setText("Number of Sale : "+Integer.toString(tot_sales));
+		lbb.setText("Total Quantity : "+Integer.toString(tot_quantity));
+		lbc.setText("");
+		
+	}
 }

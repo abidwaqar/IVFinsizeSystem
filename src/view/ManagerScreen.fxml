@@ -44,6 +44,7 @@
                </image>
             </ImageView>
             <Label prefHeight="40.0" prefWidth="134.0" text="Manager" textAlignment="JUSTIFY" textFill="#1b9fb5" GridPane.rowIndex="1" />
+            <Button fx:id="genreport" mnemonicParsing="false" onAction="#get_genreport" prefHeight="40.0" prefWidth="224.0" text="Generate Report" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </center>
