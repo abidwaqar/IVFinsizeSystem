@@ -62,6 +62,7 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="355.0" spacing="10.0" VBox.vgrow="NEVER">
                <children>
+                  <Button mnemonicParsing="false" onAction="#customerScreen" prefHeight="31.0" prefWidth="253.0" text="Customer Screen" />
                   <Button mnemonicParsing="false" onAction="#minusAction" prefHeight="25.0" prefWidth="25.0" styleClass="minus-button" />
                   <Button mnemonicParsing="false" onAction="#closeAction" prefHeight="25.0" prefWidth="25.0" styleClass="close-button" />
                </children>

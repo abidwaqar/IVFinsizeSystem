@@ -1,4 +1,5 @@
 package controller;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -97,6 +98,15 @@ public class LoginController implements Initializable {
     public void loginAction(ActionEvent event) throws Exception {
 
         authenticate(event);
+    }
+    
+    @FXML
+    public void customerScreen(ActionEvent event) throws IOException
+    {
+    	Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
+		Scene scene = new Scene(root, 650, 550);
+		Main.Get_Stage().setScene(scene);
+		Main.Get_Stage().show();
     }
 
     private void authenticate(Event event) throws Exception {
