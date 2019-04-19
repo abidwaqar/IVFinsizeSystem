@@ -39,6 +39,10 @@ public class AddRobotController {
 	private Button saveButton;
 	@FXML
 	private Button cancel;
+	@FXML
+	private TextField place;
+	
+	
 
 	// Event Listener on Button[#saveButton].onAction
 	// Event Listener on Button[#saveButton].onAction
@@ -51,7 +55,7 @@ public class AddRobotController {
 				
 				// Insert Query for insertin data in to datbase
 				try {
-					MySQLDatabase.getInstance().addERobot(code.getText(), name.getText(), desc.getText(), price.getText(), qty.getText());
+					MySQLDatabase.getInstance().addERobot(code.getText(), name.getText(), desc.getText(), price.getText(), qty.getText(), place.getText());
 					//MySQLDatabase.getInstance().addEmployee(name, password, phone, address);
 					// Querty To Add Data
 					Alert alert = new Alert(AlertType.INFORMATION);

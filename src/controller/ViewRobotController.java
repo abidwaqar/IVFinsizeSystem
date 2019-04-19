@@ -23,7 +23,7 @@ import javafx.scene.control.TextArea;
 
 public class ViewRobotController {
 	@FXML
-	private TextField CodeFeild;
+	private TextField CodeField;
 	@FXML
 	private TextArea DescriArea;
 	@FXML
@@ -33,11 +33,14 @@ public class ViewRobotController {
 	@FXML
 	private TextField priceField;
 	@FXML
+	private TextField placeField;
+	@FXML
 	private Button find;
 	@FXML
 	private Label lbl;
 	@FXML
 	private Button Back;
+	
 
 	// Event Listener on Button[#find].onAction
 	@FXML
@@ -46,7 +49,7 @@ public class ViewRobotController {
 		
 		if(validateInput())
 		{
-			String d = CodeFeild.getText();
+			String d = CodeField.getText();
 			MySQLDatabase DB = MySQLDatabase.getInstance();
 			
 			ArrayList<ArrayList<String>> data = DB.getIndexValue("E_Robot", "Code", d);
@@ -58,10 +61,12 @@ public class ViewRobotController {
 				System.out.println(data.get(0).get(1));
 				System.out.println(data.get(0).get(2));
 				System.out.println(data.get(0).get(3));
+				System.out.println(data.get(0).get(5));
 				nameField.setText(data.get(0).get(1));
 				QTYField.setText(data.get(0).get(4));
 				priceField.setText(data.get(0).get(3));
 				DescriArea.setText(data.get(0).get(2));		
+				placeField.setText(data.get(0).get(5));
 			}
 			else
 			{
@@ -74,6 +79,7 @@ public class ViewRobotController {
 				QTYField.clear();
 				priceField.clear();
 				DescriArea.clear();
+				placeField.clear();
  
         	}
 		}
@@ -94,7 +100,7 @@ public class ViewRobotController {
 
         String errorMessage = "";
       
-        if (CodeFeild.getText() == null || CodeFeild.getText().length()<=0) {
+        if (CodeField.getText() == null || CodeField.getText().length()<=0) {
             errorMessage += "Please enter Robot Code!\n";
             lbl.setText(errorMessage);
             nameField.clear();

@@ -95,10 +95,11 @@ public class MySQLDatabase {
 	}
 	
 	
-	public int addERobot(String code, String name, String desc, String price, String qty) throws SQLException
+	public int addERobot(String code, String name, String desc, String price, String qty, String item_place) throws SQLException
 	{
 		String sqlQuery = new String();
-		sqlQuery = "INSERT INTO `e_robot` (`Code`, `Name`, `Description`, `Price`, `Qty`) VALUES ('" + code + "', '" + name + "', '" + desc + "', '" + price + "', '" + qty + "')";
+		sqlQuery = "INSERT INTO `e_robot` (`Code`, `Name`, `Description`, `Price`, `Qty`, `Place`) "
+				+ "VALUES ('" + code + "', '" + name + "', '" + desc + "', '" + price + "', '" + qty + "', '" + item_place + "')";
 //		System.out.println(sqlQuery);
 		return stmt.executeUpdate(sqlQuery);
 	}
@@ -113,11 +114,11 @@ public class MySQLDatabase {
 		return stmt.executeUpdate(sqlQuery);
 	}
 	
-	public int updateERobot(String code, String name, String desc, String price, String qty) throws SQLException
+	public int updateERobot(String code, String name, String desc, String price, String qty, String place) throws SQLException
 	{
 		String sqlQuery = new String();
 		sqlQuery = "UPDATE `e_robot` SET `Code`= '" + code + "',`Name`= '" + name 
-				+"' ,`Description`= '" + desc + "',`Price`= '" + price + "',`Qty`= '" + qty + "' WHERE `Code`='" + code +"'";
+				+"' ,`Description`= '" + desc + "',`Price`= '" + price + "',`Qty`= '" + qty + "',`Place`= '" + place + "' WHERE `Code`='" + code +"'";
 //		System.out.println(sqlQuery);
 		return stmt.executeUpdate(sqlQuery);
 	}
@@ -167,6 +168,23 @@ public class MySQLDatabase {
 //		}
 //		
 //	}
+	
+	public int addCustomDemand(String demand_qty, String customer_name, String customer_phone_no, String item_name, String item_desc )
+	{
+		try 
+		{
+			String sqlQuery = new String();
+			sqlQuery = "INSERT INTO `erobot_demand`(`Demand_Qty`, `Customer_Name`, `Customer_Phone_no`, `Item_Name`, `Item_Desc`) VALUES ('" +
+					 demand_qty +"', '"+ customer_name +"','"+ customer_phone_no +"','"+ item_name +"','"+ item_desc + "');";
+//			System.out.println(sqlQuery);
+			return stmt.executeUpdate(sqlQuery);
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			return -1;
+		}
+	}
 	
 	//helper
 	private ArrayList<String> rowToColumns(ResultSet row) throws SQLException

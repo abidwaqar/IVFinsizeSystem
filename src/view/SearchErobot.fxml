@@ -73,13 +73,13 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextArea fx:id="DescriArea" disable="true" editable="false" prefHeight="22.0" prefWidth="346.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                              <TextArea fx:id="DescriArea" editable="false" prefHeight="22.0" prefWidth="346.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextArea>
                               <Label text="Name" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                              <TextField fx:id="nameField" disable="true" editable="false" prefHeight="36.0" prefWidth="339.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <TextField fx:id="nameField" editable="false" prefHeight="36.0" prefWidth="339.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
@@ -91,13 +91,13 @@
                                  </GridPane.margin>
                               </TextField>
                               <Label text="Price" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                              <TextField fx:id="priceField" disable="true" editable="false" prefHeight="40.0" prefWidth="339.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                              <TextField fx:id="priceField" editable="false" prefHeight="40.0" prefWidth="339.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
                               <Button fx:id="find" mnemonicParsing="false" onAction="#FindInfo" prefHeight="31.0" prefWidth="98.0" text="FindInfo" GridPane.columnIndex="3" />
-                              <TextField fx:id="placeField" editable="false" prefHeight="82.0" prefWidth="356.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <TextField fx:id="placeField" editable="false" maxWidth="-Infinity" prefHeight="82.0" prefWidth="347.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Place" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>

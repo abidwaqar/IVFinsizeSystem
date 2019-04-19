@@ -50,11 +50,11 @@ public class CustomDemandController
 		
 		if(validateInput())
 		{
-			String c_name = customerName.getText();
-			String c_phone_no = customerPhoneNo.getText();
-			String qty = itemQty.getText();
-			String item_name = itemName.getText();
-			String desc = itemDesc.getText();
+//			String c_name = customerName.getText();
+//			String c_phone_no = customerPhoneNo.getText();
+//			String qty = itemQty.getText();
+//			String item_name = itemName.getText();
+//			String desc = itemDesc.getText();
 			
 			MySQLDatabase DB = MySQLDatabase.getInstance();
 			
@@ -63,12 +63,18 @@ public class CustomDemandController
 //			if(data.size()>0 && data.get(0).size()>0)
 			{
 				lbl.setText("");
-				System.out.println(c_name);
-				System.out.println(c_phone_no);
-				System.out.println(qty);
-				System.out.println(itemName);
-				System.out.println(itemDesc);
-			}
+//				System.out.println(c_name);
+//				System.out.println(c_phone_no);
+//				System.out.println(qty);
+//				System.out.println(itemName);
+//				System.out.println(itemDesc);
+				DB.addCustomDemand(itemQty.getText(), customerName.getText(), customerPhoneNo.getText(), itemName.getText(), itemDesc.getText());
+				Alert alert = new Alert(AlertType.INFORMATION);
+        		alert.setTitle("Demand Added");
+        		alert.setHeaderText("Demand Added");
+        		alert.setContentText(null);
+        		alert.showAndWait();
+        		}
 //			else
 			{
 //				Alert alert = new Alert(AlertType.INFORMATION);
@@ -83,7 +89,6 @@ public class CustomDemandController
  
         	}
 		}
-		handleback(event);
 	}
 	
 	@FXML
@@ -101,7 +106,7 @@ public class CustomDemandController
 
         String errorMessage = "";
       
-        if (customerName.getText() == null || customerName.getText().length()<=0) {
+        if (customerName.getText() == null || customerName.getText().length()<=0 && customerPhoneNo.getText() == null &&  customerPhoneNo.getText().length()<=0 || itemName.getText() == null || itemName.getText().length()<=0 ) {
             errorMessage += "Please enter Credentials!\n";
             lbl.setText(errorMessage);
             customerName.clear();

@@ -63,6 +63,7 @@
                               <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="92.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="92.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
@@ -73,7 +74,7 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextArea fx:id="desc" prefHeight="81.0" prefWidth="339.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                              <TextArea fx:id="desc" prefHeight="61.0" prefWidth="456.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
@@ -96,6 +97,8 @@
                                     <Insets right="10.0" />
                                  </GridPane.margin>
                               </TextField>
+                              <TextField fx:id="place" maxWidth="-Infinity" prefHeight="60.0" prefWidth="340.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <Label text="Place" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                         <Label fx:id="lbl" prefHeight="47.0" prefWidth="256.0" textFill="#f52424" />

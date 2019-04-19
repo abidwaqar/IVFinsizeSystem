@@ -34,6 +34,8 @@ public class UpdateRobotController {
 	@FXML
 	private TextField priceField;
 	@FXML
+	private TextField placeField;
+	@FXML
 	private Button find;
 	@FXML
 	private Label lbl;
@@ -61,6 +63,7 @@ public class UpdateRobotController {
 				QTYField.setDisable(false);
 				priceField.setDisable(false);
 				DescriArea.setDisable(false);	
+				placeField.setDisable(false);
 				System.out.println(data.get(0).get(0));
 				System.out.println(data.get(0).get(1));
 				System.out.println(data.get(0).get(2));
@@ -68,7 +71,8 @@ public class UpdateRobotController {
 				nameField.setText(data.get(0).get(1));
 				QTYField.setText(data.get(0).get(4));
 				priceField.setText(data.get(0).get(3));
-				DescriArea.setText(data.get(0).get(2));		
+				DescriArea.setText(data.get(0).get(2));	
+				placeField.setText(data.get(0).get(5));
 			}
 			else
 			{
@@ -94,7 +98,7 @@ public class UpdateRobotController {
 	public void UpdateEmp(ActionEvent event)
 	{
 		try {
-			MySQLDatabase.getInstance().updateERobot(CodeFeild.getText(), nameField.getText(), DescriArea.getText(), priceField.getText(), QTYField.getText());
+			MySQLDatabase.getInstance().updateERobot(CodeFeild.getText(), nameField.getText(), DescriArea.getText(), priceField.getText(), QTYField.getText(), placeField.getText());
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Robot Edit");
 			alert.setHeaderText("Updated");

@@ -34,6 +34,8 @@ public class Delete_RobotController {
 	@FXML
 	private TextField priceField;
 	@FXML
+	private TextField placeField;
+	@FXML
 	private Button find;
 	@FXML
 	private Label lbl;
@@ -64,7 +66,8 @@ public class Delete_RobotController {
 				nameField.setText(data.get(0).get(1));
 				QTYField.setText(data.get(0).get(4));
 				priceField.setText(data.get(0).get(3));
-				DescriArea.setText(data.get(0).get(2));		
+				DescriArea.setText(data.get(0).get(2));	
+				placeField.setText(data.get(0).get(5));
 			}
 			else
 			{
@@ -77,7 +80,7 @@ public class Delete_RobotController {
 				QTYField.clear();
 				priceField.clear();
 				DescriArea.clear();
- 
+				placeField.clear();
         	}
 		}
 		

@@ -28,6 +28,10 @@ public class InventoryManagerController {
 	private Button deleteitem;
 	@FXML
 	private Button logout;
+	@FXML
+	private Button demand;
+	
+	
 
 	// Event Listener on Button[#additem].onAction
 	@FXML
@@ -76,4 +80,13 @@ public class InventoryManagerController {
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}
+	
+	@FXML
+	public void getDemand(ActionEvent event) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource("/view/demandScreen.fxml"));
+		Scene scene = new Scene(root, 950, 550);
+		Main.Get_Stage().setScene(scene);
+		Main.Get_Stage().show();
+	}
+	
 }
