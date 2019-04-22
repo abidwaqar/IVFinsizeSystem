@@ -104,12 +104,11 @@ public class MySQLDatabase {
 		return stmt.executeUpdate(sqlQuery);
 	}
 	
-	public int addSale(String Ecode, String Edesc, String EName, int price, int qty, int subtotal, int payment, String sale_code) throws SQLException
+	public int addSale(String sale_code, String Ecode, String EName, String Edesc, int price, int qty, int subtotal) throws SQLException
 	{
 		String sqlQuery = new String();
-		sqlQuery = "INSERT INTO `sale`(`ERobot_Code`, `Description`, `Robot_Name`, `PricePerItem`, `ERobot_Qty`, `Sub_Total`, `Payment`, `Sale_Code`) "
-				+ "VALUES ('"+ Ecode +"', '"+ Edesc +"','"+ EName +"','"+ price +"','"+ qty +"','"+ subtotal 
-				+"','"+ payment +"','"+sale_code+"');";
+		sqlQuery = "INSERT INTO `sale_line_item`(`sale_code`, `robot_code`, `robot_name`, `robot_desc`, `robot_price`, `qty`, `subtotal`) "
+				+ "VALUES ('"+ sale_code +"', '" + Ecode +"', '"+ EName +"','"+ Edesc +"','"+ price +"','"+ qty +"','"+ subtotal +"');";
 		System.out.println(sqlQuery);
 		return stmt.executeUpdate(sqlQuery);
 	}
@@ -136,11 +135,28 @@ public class MySQLDatabase {
 	public int setSaleLineItemOnRobotCode(String sale_code, String ERobot_Code, String qty) throws SQLException
 	{
 		String sqlQuery = new String();
-		ArrayList<ArrayList<String>> rows = new ArrayList<ArrayList<String>>();
 		sqlQuery = "UPDATE `sale` SET `ERobot_Qty`=" + qty + " WHERE `Sale_Code` = " + sale_code + " AND `ERobot_Code`= " + ERobot_Code+ ";";
 		return stmt.executeUpdate(sqlQuery);
 	}
 
+	public int getCurrentSale() throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "SELECT MAX(sale_code) FROM sale;";
+		ResultSet rs = stmt.executeQuery(sqlQuery);
+		//Cuz it points to -1th index in the begining
+		rs.next();
+		return rs.getInt(1);
+		
+	}
+	
+	public void addSale() throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "INSERT INTO `sale`(`total_amount`, `payment`) VALUES (0,0)";
+		stmt.executeUpdate(sqlQuery);
+	}
+	
 //	public 
 //	{
 //		String sqlQuery = new String();
@@ -186,13 +202,95 @@ public class MySQLDatabase {
 		}
 	}
 	
+	public ArrayList<String> getSaleLineItemInfo(String sale_code, String robot_code) throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "SELECT * FROM `sale_line_item` WHERE robot_code = " + robot_code + " AND sale_code = " + sale_code + ";";
+		ResultSet rsRows = stmt.executeQuery(sqlQuery);
+		rsRows.next();
+		return rowToColumns(rsRows);
+	}
+	
+	public void updateSaleLineItem(String sale_code, String robot_code, String qty, String sub_total) throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "UPDATE `sale_line_item` SET `qty`= "+ qty + ",`subtotal`= " + sub_total 
+				+ " WHERE sale_code = " + sale_code + " AND robot_code = "+ robot_code + ";";
+//		System.err.println(sqlQuery);
+		stmt.executeUpdate(sqlQuery);
+	}
+	
+	public void removeSaleLineItem(String sale_code, String robot_code) throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "DELETE FROM `sale_line_item` WHERE sale_code = " + sale_code + " AND robot_code = " + robot_code + ";";
+//		System.err.println(sqlQuery);
+		stmt.executeUpdate(sqlQuery);
+		
+	}
+	
+	public int getTotalAmount(int sale_code) throws SQLException
+	{
+
+		String sqlQuery = new String();
+		sqlQuery = "SELECT SUM(subtotal) FROM `sale_line_item` WHERE sale_code = " + sale_code + ";";
+//		System.err.println(sqlQuery);
+		ResultSet rs = stmt.executeQuery(sqlQuery);
+		rs.next();
+		return Integer.valueOf(rs.getInt(1)); 
+		
+	}
+	
+	public void runQuery(String query) throws SQLException
+	{
+		stmt.executeUpdate(query);
+	}
+	
+	public void removeSale(int sale_code) throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "DELETE FROM sale WHERE sale_code = " + sale_code + ";";
+		stmt.executeUpdate(sqlQuery);
+	}
+	
+	public ResultSet getSaleInfo(int sale_code) throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "SELECT * FROM `sale_line_item` WHERE sale_code = " + sale_code + ";";
+		return stmt.executeQuery(sqlQuery);
+	}
+	
+	public void setSale(int sale_code, String total_amount, String payment ) throws SQLException
+	{
+		
+		String sqlQuery = new String();
+		sqlQuery = "UPDATE `sale` SET `total_amount`= " + total_amount + ",`payment`= " + payment + " WHERE sale_code = " + sale_code + ";";
+		System.err.println(sqlQuery);
+		stmt.executeUpdate(sqlQuery);
+	}
+	
+	public ResultSet getDemands() throws SQLException
+	{
+		String sqlQuery = new String();
+		sqlQuery = "SELECT * from erobot_demand;";
+//		System.err.println(sqlQuery);
+		return stmt.executeQuery(sqlQuery);
+	}
+	
 	//helper
 	private ArrayList<String> rowToColumns(ResultSet row) throws SQLException
 	{
-		int columnCount = row.getMetaData().getColumnCount();
 		ArrayList<String> rowData = new ArrayList<String>();
-		for (int j = 1; j < columnCount+1; ++j){
-			rowData.add(row.getString(j));
+		try
+		{
+			int columnCount = row.getMetaData().getColumnCount();
+			for (int j = 1; j < columnCount+1; ++j){
+				rowData.add(row.getString(j));
+			}
+		}
+		catch (SQLException e)
+		{
+			System.out.println("No Data found");
 		}
 		return rowData;
 	}

@@ -63,53 +63,43 @@ public class ProcessSaleController implements Initializable {
 	{
 		if(tableview!=null)
 		{
-			
-		
-		tableview.getColumns().clear();
+			tableview.getColumns().clear();
 		}
 		 data = null;	
          data = FXCollections.observableArrayList();
          try{
-        	String url1 = "jdbc:mysql://localhost/ivfinsizesystem";
-     		String user = "root";
-     		String password = "";
-     		Class.forName("com.mysql.jdbc.Driver");
-			Connection c1;
-     		c1 = DriverManager.getConnection(url1, user, password);
-			Statement stmt = (Statement) c1.createStatement();
-	         String SQL = "SELECT * from sale where sale_code = " + Integer.toString(SID);
-	         ResultSet rs = c1.createStatement().executeQuery(SQL);
+	         ResultSet rs = MySQLDatabase.getInstance().getSaleInfo(MySQLDatabase.getInstance().getCurrentSale());
 
-           /**********************************
-            * TABLE COLUMN ADDED DYNAMICALLY *
-            **********************************/
-           for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
-               //We are using non property style for making dynamic table
-               final int j = i;                
-               TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
-               col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
-                   public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
-                       return new SimpleStringProperty(param.getValue().get(j).toString());                        
-                   }                    
-               });
+	         /**********************************
+	          * TABLE COLUMN ADDED DYNAMICALLY *
+	          **********************************/
+	         for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
+	        	 //We are using non property style for making dynamic table
+	        	 final int j = i;                
+	        	 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
+	        	 col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+	        		 public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+	        			 return new SimpleStringProperty(param.getValue().get(j).toString());                        
+	        		 }                    
+	        	 });
               
-               tableview.getColumns().addAll(col); 
-               System.out.println("Column ["+i+"] ");
-           }
+	        	 tableview.getColumns().addAll(col); 
+	        	 System.out.println("Column ["+i+"] ");
+	         }
 
-           /********************************
-            * Data added to ObservableList *
-            ********************************/
-           while(rs.next()){
-               //Iterate Row
-               ObservableList<String> row = FXCollections.observableArrayList();
-               for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++)
-               {
-                   //Iterate Column
-                   row.add(rs.getString(i));
-               }
-               System.out.println("Row [1] added "+row );
-               data.add(row);
+	         /********************************
+	          * Data added to ObservableList *
+	          ********************************/
+	         while(rs.next()){
+	        	 //Iterate Row
+	        	 ObservableList<String> row = FXCollections.observableArrayList();
+	        	 for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++)
+	        	 {
+	        		 //Iterate Column
+	        		 row.add(rs.getString(i));
+	        	 }
+	        	 System.out.println("Row [1] added "+row );
+	        	 data.add(row);
 
            }
 
@@ -181,7 +171,7 @@ public class ProcessSaleController implements Initializable {
 	@FXML
 	public void MakePayment(ActionEvent event) throws SQLException, Exception 
 	{
-		ArrayList<ArrayList<String>> info = MySQLDatabase.getInstance().getIndexValue("sale", "sale_code", Integer.toString(SaleNo));
+		ArrayList<ArrayList<String>> info = MySQLDatabase.getInstance().getIndexValue("sale_line_item", "sale_code", String.valueOf(MySQLDatabase.getInstance().getCurrentSale()));
 		if(info.size()>0)
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("/view/Payment.fxml"));
@@ -217,7 +207,7 @@ public class ProcessSaleController implements Initializable {
 		{
 			String dat="ERobot_Code   Description   Robot Name  Price          Quantity   Sub Total   Var  Sale No\n"
 					+ " ---------------------------------------------------------------------------------------------------\n";
-			ArrayList<ArrayList<String>> info = MySQLDatabase.getInstance().getIndexValue("sale","sale_code",Integer.toString(SaleNo));
+			ArrayList<ArrayList<String>> info = MySQLDatabase.getInstance().getIndexValue("sale_line_item","sale_code",String.valueOf(MySQLDatabase.getInstance().getCurrentSale()));
 			 for(int i=0;i<info.size();i++)
 			 {
 				 for(int j=0;j<info.get(i).size();j++)
@@ -243,9 +233,10 @@ public class ProcessSaleController implements Initializable {
 			alert.showAndWait();
 			}
 	}
-	public void cancelsale(ActionEvent e) throws IOException
+	public void cancelsale(ActionEvent e) throws SQLException, Exception
 	{
 		System.out.println("Authenticate");
+		MySQLDatabase.getInstance().removeSale(MySQLDatabase.getInstance().getCurrentSale());
 		Parent root = FXMLLoader.load(getClass().getResource("/view/CashierScreen.fxml"));
 		Scene scene = new Scene(root, 650, 550);
 		Main.Get_Stage().setScene(scene);

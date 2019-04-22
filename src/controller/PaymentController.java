@@ -13,9 +13,11 @@ import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import application.Main;
+import database.MySQLDatabase;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
@@ -38,26 +40,34 @@ public class PaymentController implements Initializable {
 	static public String tot,np,rt;
 	// Event Listener on Button[#payment].onAction
 	@FXML
-	public void makepayment(ActionEvent event) throws IOException 
+	public void makepayment(ActionEvent event) throws SQLException, Exception 
 	{
 		System.out.println("Total"+total.getText());
 		System.out.println("NetPay"+netpay.getText());
 		System.out.println("Discount"+discount.getText());
-		int r = Integer.parseInt(netpay.getText())-Integer.parseInt(total.getText())+Integer.parseInt(discount.getText());
-		System.out.println("SaleNO"+ProcessSaleController.SaleNo);		
-		System.out.println("returns" +r);
-		tot = total.getText();
-		np= netpay.getText();
-		rt = Integer.toString(r);
-		returns.setText(Integer.toString(r));
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Payment Details");
-		alert.setHeaderText(null);
-		alert.setContentText("Payment Successfully Done!!");
-		alert.showAndWait();
-		//Funciton to set Total crossponding to Sale 
-		//Query to insert the Payment in crossponding Sale using Slae NO
-		
+		int final_amount = Integer.parseInt(netpay.getText())-Integer.parseInt(total.getText())+Integer.parseInt(discount.getText());
+		if (final_amount < 0)
+		{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Payment Unsuccessful");
+			alert.setHeaderText(null);
+			alert.setContentText("Payment Unsuccessfull!!");
+			alert.showAndWait();
+		}
+		else
+		{
+			System.out.println("returns" + final_amount);
+			tot = total.getText();
+			np= netpay.getText();
+			rt = Integer.toString(final_amount);
+			returns.setText(Integer.toString(final_amount));
+			MySQLDatabase.getInstance().setSale(MySQLDatabase.getInstance().getCurrentSale(), total.getText(), netpay.getText());
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Payment Details");
+			alert.setHeaderText(null);
+			alert.setContentText("Payment Successfully Done!!");
+			alert.showAndWait();
+		}
 	}
 	
 	
@@ -92,8 +102,15 @@ public class PaymentController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
+		try {
+			total.setText(String.valueOf(MySQLDatabase.getInstance().getTotalAmount(MySQLDatabase.getInstance().getCurrentSale())));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

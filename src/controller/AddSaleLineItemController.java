@@ -103,8 +103,9 @@ public class AddSaleLineItemController
 			
 		lbl.setText("");
 		System.out.println("QTY"+ QTYField.getText());	
-		int p = Integer.parseInt(QTYField.getText())*Integer.parseInt(priceField.getText());
-		MySQLDatabase.getInstance().addSale(CodeFeild.getText(), DescriArea.getText(), nameField.getText(), Integer.parseInt(priceField.getText()), Integer.parseInt(QTYField.getText()),p, 0, Integer.toString(ProcessSaleController.SaleNo));
+		int subtotal = Integer.parseInt(QTYField.getText())*Integer.parseInt(priceField.getText());
+		System.out.println(String.valueOf(MySQLDatabase.getInstance().getCurrentSale()));
+		MySQLDatabase.getInstance().addSale(String.valueOf(MySQLDatabase.getInstance().getCurrentSale()) , CodeFeild.getText(), nameField.getText(), DescriArea.getText(),  Integer.parseInt(priceField.getText()), Integer.parseInt(QTYField.getText()), subtotal);
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
 		Scene scene = new Scene(root, 1000, 550);
 		Main.Get_Stage().setScene(scene);

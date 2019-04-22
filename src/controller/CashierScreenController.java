@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import application.Main;
+import database.MySQLDatabase;
 import javafx.event.ActionEvent;
 
 import javafx.scene.layout.BorderPane;
@@ -23,10 +25,11 @@ public class CashierScreenController {
 
 	// Event Listener on Button[#ProcessSale].onAction
 	@FXML
-	public void ProcessSaleScreen(ActionEvent event) throws IOException {
+	public void ProcessSaleScreen(ActionEvent event) throws SQLException, Exception {
 		PaymentController.tot="";PaymentController.np="";PaymentController.rt=null;
 		System.out.println("Authenticate");
 		ProcessSaleController.SaleNo++;
+		MySQLDatabase.getInstance().addSale();
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
 		Scene scene = new Scene(root, 1000, 550);
 		Main.Get_Stage().setScene(scene);

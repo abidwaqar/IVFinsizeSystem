@@ -53,19 +53,20 @@ public class EditSaleLineItemController {
 			String d = CodeFeild.getText();
 			MySQLDatabase DB = MySQLDatabase.getInstance();
 			
-			ArrayList<ArrayList<String>> data = DB.getIndexValue("E_Robot", "Code", d);
+			ArrayList<String> data = DB.getSaleLineItemInfo(String.valueOf(DB.getCurrentSale()), CodeFeild.getText());
 			
 			
-			if(data.size()>0 && data.get(0).size()>0)
+			if(data.size()>0 && data.size()>0)
 			{
 				lbl.setText("");
-				System.out.println(data.get(0).get(0));
-				System.out.println(data.get(0).get(1));
-				System.out.println(data.get(0).get(2));
-				System.out.println(data.get(0).get(3));
-				nameField.setText(data.get(0).get(1));
-				priceField.setText(data.get(0).get(3));
-				DescriArea.setText(data.get(0).get(2));		
+				System.out.println(data.get(0));
+				System.out.println(data.get(1));
+				System.out.println(data.get(2));
+				System.out.println(data.get(3));
+				nameField.setText(data.get(2));
+				priceField.setText(data.get(4));
+				DescriArea.setText(data.get(3));
+				QTYField.setText(data.get(5));
 			}
 			else
 			{
@@ -104,9 +105,10 @@ public class EditSaleLineItemController {
 			
 		lbl.setText("");
 		System.out.println("QTY"+ QTYField.getText());	
-		int p = Integer.parseInt(QTYField.getText())*Integer.parseInt(priceField.getText());
-		//Update Call Function Here 
-		//Edr update sale k table mein us particular entity ko update karna hai jis ka code or sale no current sale se match kartay hn ok!!!
+		int sub_total = Integer.parseInt(QTYField.getText())*Integer.parseInt(priceField.getText());
+		MySQLDatabase DB = MySQLDatabase.getInstance();
+		DB.updateSaleLineItem(String.valueOf(DB.getCurrentSale()), CodeFeild.getText(), QTYField.getText(), String.valueOf(sub_total));
+		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
 		Scene scene = new Scene(root, 1000, 550);
 		Main.Get_Stage().setScene(scene);

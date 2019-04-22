@@ -52,18 +52,18 @@ public class RemoveSaleLineItemController
 			String d = CodeFeild.getText();
 			MySQLDatabase DB = MySQLDatabase.getInstance();
 			
-			ArrayList<ArrayList<String>> data = DB.getIndexValue("E_Robot", "Code", d);
-			
-			if(data.size()>0 && data.get(0).size()>0)
+			ArrayList<String> data = DB.getSaleLineItemInfo(String.valueOf(DB.getCurrentSale()), CodeFeild.getText());
+
+			if(data.size()>0 && data.size()>0)
 			{
 				lbl.setText("");
-				System.out.println(data.get(0).get(0));
-				System.out.println(data.get(0).get(1));
-				System.out.println(data.get(0).get(2));
-				System.out.println(data.get(0).get(3));
-				nameField.setText(data.get(0).get(1));
-				priceField.setText(data.get(0).get(3));
-				DescriArea.setText(data.get(0).get(2));		
+				System.out.println(data.get(0));
+				System.out.println(data.get(1));
+				System.out.println(data.get(2));
+				System.out.println(data.get(3));
+				nameField.setText(data.get(2));
+				priceField.setText(data.get(4));
+				DescriArea.setText(data.get(3));
 			}
 			else
 			{
@@ -89,7 +89,7 @@ public class RemoveSaleLineItemController
 		{
 		
 		lbl.setText("");
-		//Delete Query Here
+		MySQLDatabase.getInstance().removeSaleLineItem(String.valueOf(MySQLDatabase.getInstance().getCurrentSale()), CodeFeild.getText());
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
 		Scene scene = new Scene(root, 1000, 550);
 		Main.Get_Stage().setScene(scene);

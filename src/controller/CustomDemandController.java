@@ -74,6 +74,7 @@ public class CustomDemandController
         		alert.setHeaderText("Demand Added");
         		alert.setContentText(null);
         		alert.showAndWait();
+        		handleback(event);
         		}
 //			else
 			{

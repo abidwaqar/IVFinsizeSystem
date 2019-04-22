@@ -58,15 +58,7 @@ public class demandController implements Initializable {
 		 data = null;	
          data = FXCollections.observableArrayList();
          try{
-        	String url1 = "jdbc:mysql://localhost/ivfinsizesystem";
-     		String user = "root";
-     		String password = "";
-     		Class.forName("com.mysql.jdbc.Driver");
-			Connection c1;
-     		c1 = DriverManager.getConnection(url1, user, password);
-			Statement stmt = (Statement) c1.createStatement();
-	         String SQL = "SELECT * from erobot_demand";
-	         ResultSet rs = c1.createStatement().executeQuery(SQL);
+	         ResultSet rs = MySQLDatabase.getInstance().getDemands();
 
            /**********************************
             * TABLE COLUMN ADDED DYNAMICALLY *
