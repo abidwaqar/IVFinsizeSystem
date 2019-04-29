@@ -65,7 +65,7 @@ public class SaleReportController implements Initializable {
 			Connection c1;
      		c1 = DriverManager.getConnection(url1, user, password);
 			Statement stmt = (Statement) c1.createStatement();
-	         String SQL = "SELECT * from sale";
+	         String SQL = "SELECT * from sale_line_item";
 	         ResultSet rs = c1.createStatement().executeQuery(SQL);
 
            /**********************************
@@ -124,7 +124,7 @@ public class SaleReportController implements Initializable {
 		ArrayList<ArrayList<String>> info = null;
 		int tot_sales=0,tot_quantity=0;
 		 try {
-			info= MySQLDatabase.getInstance().getRows("sale");
+			info= MySQLDatabase.getInstance().getRows("sale_line_item");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
