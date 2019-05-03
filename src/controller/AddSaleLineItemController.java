@@ -107,7 +107,7 @@ public class AddSaleLineItemController
 		System.out.println(String.valueOf(MySQLDatabase.getInstance().getCurrentSale()));
 		MySQLDatabase.getInstance().addSale(String.valueOf(MySQLDatabase.getInstance().getCurrentSale()) , CodeFeild.getText(), nameField.getText(), DescriArea.getText(),  Integer.parseInt(priceField.getText()), Integer.parseInt(QTYField.getText()), subtotal);
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
-		Scene scene = new Scene(root, 1000, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 		}
@@ -128,7 +128,7 @@ public class AddSaleLineItemController
 		
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
-		Scene scene = new Scene(root, 1000, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}

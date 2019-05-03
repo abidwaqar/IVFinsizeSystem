@@ -104,8 +104,8 @@ public class demandController implements Initializable {
 	// Event Listener on Button[#cancel].onAction
 	@FXML
 	public void cancelsale(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/view/ManagerScreen.fxml"));
-		Scene scene = new Scene(root, 650, 550);
+		Parent root = FXMLLoader.load(getClass().getResource("/view/InventoryManagerScreen.fxml"));
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}

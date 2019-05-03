@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="welcomeBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CashierScreenController">
+<BorderPane fx:id="welcomeBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="990.0" prefWidth="1920.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CashierScreenController">
    <top>
       <Label alignment="CENTER" ellipsisString="" prefHeight="42.0" prefWidth="339.0" text="Welcome To IV FinSize System" textAlignment="CENTER" textOverrun="CLIP" BorderPane.alignment="CENTER">
          <font>
@@ -23,11 +23,11 @@
       <Insets left="10.0" />
    </padding>
    <left>
-      <GridPane alignment="CENTER" prefHeight="638.0" prefWidth="590.0" BorderPane.alignment="CENTER">
+      <GridPane alignment="CENTER" prefHeight="918.0" prefWidth="1910.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="206.0" minWidth="10.0" prefWidth="175.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="426.0" minWidth="10.0" prefWidth="272.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="144.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="847.0" minWidth="0.0" prefWidth="67.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1706.0" minWidth="10.0" prefWidth="1706.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="0.0" prefWidth="65.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
@@ -38,9 +38,9 @@
             <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="ProcessSale" mnemonicParsing="false" onAction="#ProcessSaleScreen" prefHeight="52.0" prefWidth="272.0" text="Process Sale" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="logout" mnemonicParsing="false" onAction="#Back" prefHeight="52.0" prefWidth="272.0" text="Logout" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ImageView fitHeight="161.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+            <Button fx:id="ProcessSale" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ProcessSaleScreen" prefHeight="52.0" prefWidth="592.0" text="Process Sale" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false" onAction="#Back" prefHeight="52.0" prefWidth="585.0" text="Logout" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <ImageView fitHeight="161.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <image>
                   <Image url="@../logo.png" />
                </image>

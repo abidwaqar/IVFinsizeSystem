@@ -110,7 +110,7 @@ public class EditSaleLineItemController {
 		DB.updateSaleLineItem(String.valueOf(DB.getCurrentSale()), CodeFeild.getText(), QTYField.getText(), String.valueOf(sub_total));
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
-		Scene scene = new Scene(root, 1000, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 		}
@@ -131,7 +131,7 @@ public class EditSaleLineItemController {
 		
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
-		Scene scene = new Scene(root, 1000, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}

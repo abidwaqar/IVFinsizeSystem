@@ -104,7 +104,7 @@ public class LoginController implements Initializable {
     public void customerScreen(ActionEvent event) throws IOException
     {
     	Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
-		Scene scene = new Scene(root, 650, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
     }
@@ -124,27 +124,27 @@ public class LoginController implements Initializable {
             	{
             		if(user.equals(id.get(0).get(1)) && pass.equals(id.get(0).get(2)))
             		{
-            			if(Designation.getText().equals("Manager"))
+            			if(Designation.getText().equals("Manager")  && (id.get(0).get(5).equals("M")))
             			{
             				System.out.println("Authenticate");
                 			Parent root = FXMLLoader.load(getClass().getResource("/view/ManagerScreen.fxml"));
-                			Scene scene = new Scene(root, 650, 550);
+                			Scene scene = new Scene(root, 1920, 990);
                 			Main.Get_Stage().setScene(scene);
                 			Main.Get_Stage().show();
             			}
-            			if(Designation.getText().equals("Inventory Manager"))
+            			if(Designation.getText().equals("Inventory Manager") && (id.get(0).get(5).equals("IM")))
             			{
             				System.out.println("Authenticate");
                 			Parent root = FXMLLoader.load(getClass().getResource("/view/InventoryManagerScreen.fxml"));
-                			Scene scene = new Scene(root, 650, 550);
+                			Scene scene = new Scene(root, 1920, 990);
                 			Main.Get_Stage().setScene(scene);
                 			Main.Get_Stage().show();
             			}
-            			if(Designation.getText().equals("Cashier"))
+            			if(Designation.getText().equals("Cashier") && (id.get(0).get(5).equals("C")))
             			{
             				System.out.println("Authenticate");
                 			Parent root = FXMLLoader.load(getClass().getResource("/view/CashierScreen.fxml"));
-                			Scene scene = new Scene(root, 650, 550);
+                			Scene scene = new Scene(root, 1920, 990);
                 			Main.Get_Stage().setScene(scene);
                 			Main.Get_Stage().setTitle("Process Sale");
                 			Main.Get_Stage().show();
@@ -157,6 +157,8 @@ public class LoginController implements Initializable {
             				alert.setContentText("Enter Your Desigination");
             				alert.showAndWait();
             			}
+            			
+            			
             			
             		}
             	}

@@ -91,7 +91,7 @@ public class RemoveSaleLineItemController
 		lbl.setText("");
 		MySQLDatabase.getInstance().removeSaleLineItem(String.valueOf(MySQLDatabase.getInstance().getCurrentSale()), CodeFeild.getText());
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
-		Scene scene = new Scene(root, 1000, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 		}
@@ -111,7 +111,7 @@ public class RemoveSaleLineItemController
 		
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
-		Scene scene = new Scene(root, 1000, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}

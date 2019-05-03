@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SaleReportController">
+<HBox alignment="CENTER" prefHeight="990.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SaleReportController">
    <children>
-      <VBox prefHeight="551.0" prefWidth="803.0">
+      <VBox alignment="CENTER" prefHeight="990.0" prefWidth="1700.0">
          <children>
-            <TableView fx:id="tableview" prefHeight="500.0" prefWidth="800.0" />
+            <TableView fx:id="tableview" prefHeight="990.0" prefWidth="1900.0" />
             <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelsale" prefHeight="51.0" prefWidth="986.0" text="Back" />
          </children>
       </VBox>

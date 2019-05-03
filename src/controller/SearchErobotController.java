@@ -96,7 +96,7 @@ public class SearchErobotController
 		
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
-		Scene scene = new Scene(root, 1000, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}

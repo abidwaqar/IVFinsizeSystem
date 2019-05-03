@@ -118,7 +118,7 @@ public class DeleteEmpController {
 	public void handleCancel(ActionEvent event) throws IOException {
 		System.out.println("Authenticate");
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ManagerScreen.fxml"));
-		Scene scene = new Scene(root, 650, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}

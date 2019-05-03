@@ -130,7 +130,7 @@ public class ProcessSaleController implements Initializable {
 		else
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("/view/CashierScreen.fxml"));
-			Scene scene = new Scene(root, 650, 550);
+			Scene scene = new Scene(root,1920, 990);
 			Main.Get_Stage().setScene(scene);
 			Main.Get_Stage().setTitle("Process Sale");
 			Main.Get_Stage().show();
@@ -144,7 +144,7 @@ public class ProcessSaleController implements Initializable {
 	{
 		System.out.println("Authenticate");
 		Parent root = FXMLLoader.load(getClass().getResource("/view/AddSaleLineItem.fxml"));
-		Scene scene = new Scene(root, 650, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}
@@ -153,7 +153,7 @@ public class ProcessSaleController implements Initializable {
 	public void RemoveSaleLineItem(ActionEvent event) throws IOException {
 		System.out.println("Authenticate");
 		Parent root = FXMLLoader.load(getClass().getResource("/view/RemoveSaleLineItem.fxml"));
-		Scene scene = new Scene(root, 650, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	
@@ -162,7 +162,7 @@ public class ProcessSaleController implements Initializable {
 	public void EditSaleLineItem(ActionEvent event) throws IOException {
 		System.out.println("Authenticate");
 		Parent root = FXMLLoader.load(getClass().getResource("/view/EditSaleLineItem.fxml"));
-		Scene scene = new Scene(root, 650, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	
@@ -175,7 +175,7 @@ public class ProcessSaleController implements Initializable {
 		if(info.size()>0)
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("/view/Payment.fxml"));
-			Scene scene = new Scene(root, 650, 550);
+			Scene scene = new Scene(root, 1920, 990);
 			Main.Get_Stage().setScene(scene);
 			Main.Get_Stage().show();
 		}
@@ -238,7 +238,7 @@ public class ProcessSaleController implements Initializable {
 		System.out.println("Authenticate");
 		MySQLDatabase.getInstance().removeSale(MySQLDatabase.getInstance().getCurrentSale());
 		Parent root = FXMLLoader.load(getClass().getResource("/view/CashierScreen.fxml"));
-		Scene scene = new Scene(root, 650, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().setTitle("Process Sale");
 		Main.Get_Stage().show();

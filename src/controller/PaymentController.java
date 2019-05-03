@@ -67,6 +67,7 @@ public class PaymentController implements Initializable {
 			alert.setHeaderText(null);
 			alert.setContentText("Payment Successfully Done!!");
 			alert.showAndWait();
+			handleCancel(event);
 		}
 	}
 	
@@ -78,7 +79,7 @@ public class PaymentController implements Initializable {
 		
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/ProcessSale.fxml"));
-		Scene scene = new Scene(root, 1000, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}

@@ -86,7 +86,7 @@ public class ViewReportController {
 
            //FINALLY ADDED TO TableView
            tableview.setItems(data);
-           Scene s = new Scene(tableview,600,600);
+           Scene s = new Scene(tableview,1920, 990);
            Main.Get_Stage().setScene(s);
            Main.Get_Stage().show();
          }catch(Exception e){
@@ -105,7 +105,7 @@ public class ViewReportController {
 	public void logoutH(ActionEvent event) throws IOException {
 		System.out.println("Authenticate");
 		Parent root = FXMLLoader.load(getClass().getResource("/view/InventoryManagerScreen.fxml"));
-		Scene scene = new Scene(root, 550, 550);
+		Scene scene = new Scene(root, 1920, 990);
 		Main.Get_Stage().setScene(scene);
 		Main.Get_Stage().show();
 	}
